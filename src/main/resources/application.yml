@@ -1,0 +1,63 @@
+server:
+  port: 5000
+
+home:
+  directory: writable:home
+
+
+management:
+  context-path: /system
+  security:
+    enabled: true
+
+spring:
+  liquibase:
+    change-log: classpath:changelog-master.xml
+    contexts: production,test
+  profiles:
+    active: dev
+
+  datasource:
+    #platform: postgres
+    dataSourceClassName: org.postgresql.ds.PGPoolingDataSource
+    url: jdbc:postgresql://localhost:5432/test_dashboard
+    poolName: SpringBootHikariCP
+    username: postgres
+    password:
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    continueOnError: true
+
+  jpa:
+    #database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    openInView: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.hbm2ddl.auto: none
+      hibernate.temp.use_jdbc_metadata_defaults: false
+
+
+logging:
+  file: /tmp/sexopolitics-web.log
+  level:
+    root: INFO
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+
+
+
+multipart:
+  maxFileSize: 128000MB
+  maxRequestSize: 128000MB
+
