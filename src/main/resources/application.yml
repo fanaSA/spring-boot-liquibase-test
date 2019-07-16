@@ -19,8 +19,8 @@ spring:
 
   datasource:
     #platform: postgres
-    dataSourceClassName: org.postgresql.ds.PGPoolingDataSource
-    url: jdbc:postgresql://localhost:5432/test_dashboard
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    url: jdbc:h2:mem:testdb
     poolName: SpringBootHikariCP
     username: postgres
     password:
@@ -30,7 +30,7 @@ spring:
 
   jpa:
     #database: POSTGRESQL
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
     openInView: false
     generate-ddl: false
